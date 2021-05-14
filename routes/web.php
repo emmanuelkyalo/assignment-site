@@ -26,7 +26,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/auth-new-assignment','AssignmentController@newAssignmentForm');
     Route::post('/save-new-assignment','AssignmentController@storeNewAssignment');
     Route::get('/client-dashboard','ClientController@dashboard');
-    Route::get('/assignments/{id}','ClientController@assignmentDetails');
+    Route::get('/assignments/{id}','ClientController@assignmentDetails')->name('assignment-detail');
+    Route::post('/post-new-comment','CommentsController@newComment');
+
+
+    //STRICTLY ADMIN ROUTES
+    Route::get('/admin-dashboard','AdminController@viewAssignments');
     });
 
     Route::get('/guest-new-assignment','AssignmentController@guestNewAssignment');

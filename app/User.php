@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Http\Request;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','country', 'email', 'password', 'phone_number','level'
+        'name', 'country', 'email', 'password', 'phone_number', 'level',
     ];
 
     /**
@@ -38,10 +38,14 @@ class User extends Authenticatable
 
     public function assignments()
     {
-        $this->hasMany(Assignment::class);
+      return   $this->hasMany(Assignment::class);
     }
     public function files()
     {
-        $this->hasMany(File::class);
+     return    $this->hasMany(File::class);
+    }
+    public function comments()
+    {
+      return   $this->hasMany(Comment::class);
     }
 }

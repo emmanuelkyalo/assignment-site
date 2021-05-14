@@ -12,7 +12,7 @@ class File extends Model
 
     public function assignment()
     {
-        $this->belongsTo(Assignment::class);
+        return    $this->belongsTo(Assignment::class);
 
     }
 }
