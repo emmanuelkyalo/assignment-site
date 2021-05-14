@@ -20,11 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::post('/save-new-assignment','AssignmentController@storeNewAssignment');
 Route::middleware(['auth'])->group(function () {
     //After Login the routes are accept by the loginUsers...
     Route::get('/auth-new-assignment','AssignmentController@newAssignmentForm');
-    Route::post('/save-new-assignment','AssignmentController@storeNewAssignment');
+
     Route::get('/client-dashboard','ClientController@dashboard');
     Route::get('/assignments/{id}','ClientController@assignmentDetails')->name('assignment-detail');
     Route::post('/post-new-comment','CommentsController@newComment');
@@ -34,4 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin-dashboard','AdminController@viewAssignments');
     });
 
-    Route::get('/guest-new-assignment','AssignmentController@guestNewAssignment');
+
+    Route::group(['middleware' => ['guest']], function () {
+        Route::get('/guest-new-assignment','AssignmentController@guestNewAssignment');
+    });

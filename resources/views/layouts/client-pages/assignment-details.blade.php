@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content">
-            <div class="col-md-7">
+            <div class="col-md-7"  >
                 <div class="card">
                     <div class="card-header"><a href="/client-dashboard">{{ __('All My Assignments') }}</a>/This
                         Assignment</div>

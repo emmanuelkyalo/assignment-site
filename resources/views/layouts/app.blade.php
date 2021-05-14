@@ -117,7 +117,7 @@
 
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="font-size: 12px">
             @yield('content')
         </main>
     </div>

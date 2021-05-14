@@ -10,7 +10,7 @@ class AssignmentController extends Controller
 {
     public function newAssignmentForm()
     {
-        return view('layouts.client-pages.auth-new-assignment.blade.php');
+        return view('layouts.client-pages.auth-new-assignment');
     }
     public function guestNewAssignment()
     {
