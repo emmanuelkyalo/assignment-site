@@ -18,12 +18,17 @@ class CreateAssignmentsTable extends Migration
             $table->string('userEmail');
             $table->string('userName');
             $table->string('userPhone');
-            $table->string('pages');
-            $table->longText('instructions');
+            $table->string('title');
+            $table->string('pages')->nullable();
+            $table->string('level')->nullable();
+            $table->longText('instructions')->nullable();
+            $table->string('referencing');
+            $table->string('no_of_references');
+            $table->string('subject_area');
             $table->string('paymentStatus');
             $table->string('completionStatus');
             $table->string('deadline');
-            
+
 
             $table->timestamps();
         });

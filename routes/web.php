@@ -20,3 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/new-assigment','AssignmentController@newAssignmentForm');
+Route::post('/save-new-assignment','AssignmentController@storeNewAssignment()');
