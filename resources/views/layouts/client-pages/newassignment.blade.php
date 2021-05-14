@@ -8,7 +8,8 @@
                     <div class="card-header">{{ __('Submit Assignment') }}</div>
 
                     <div class="card-body">
-                        <form action="/action_page.php">
+                        <form method="POST" action="{{ url('/save-new-assignment') }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="email">Assignment Title</label>
@@ -30,45 +31,45 @@
                                     <label for="sel1">Subject Area:</label>
                                     <select class="form-control" id="subject_area" name="subject_area">
                                         <option value="Archaeology">General</option>
-                                            <option value="Archaeology">Archaeology</option>
-                                            <option value="Architecture">Architecture</option>
-                                            <option value="Arts">Arts</option>
-                                            <option value="Astronomy">Astronomy</option>
-                                            <option value="Biology">Biology</option>
-                                            <option value="Business">Business</option>
-                                            <option value="Chemistry">Chemistry</option>
-                                            <option value="Childcare">Childcare</option>
-                                            <option value="Computers">Computers</option>
-                                            <option value="Counseling">Counseling</option>
-                                            <option value="Criminology">Criminology</option>
-                                            <option value="Economics">Economics</option>
-                                            <option value="Education">Education</option>
-                                            <option value="Engineering">Engineering</option>
-                                            <option value="Environmental-Studies">Environmental-Studies</option>
-                                            <option value="Ethics">Ethics</option>
-                                            <option value="Ethnic-Studies">Ethnic-Studies</option>
-                                            <option value="Finance">Finance</option>
-                                            <option value="Food-Nutrition">Food-Nutrition</option>
-                                            <option value="Geography">Geography</option>
-                                            <option value="Healthcare">Healthcare</option>
-                                            <option value="History">History</option>
-                                            <option value="Law">Law</option>
-                                            <option value="Linguistics">Linguistics</option>
-                                            <option value="Literature">Literature</option>
-                                            <option value="Management">Management</option>
-                                            <option value="Mathematics">Mathematics</option>
-                                            <option value="Medicine">Medicine</option>
-                                            <option value="Music">Music</option>
-                                            <option value="Nursing">Nursing</option>
-                                            <option value="Philosophy">Philosophy</option>
-                                            <option value="Physical-Education">Physical-Education</option>
-                                            <option value="Physics">Physics</option>
-                                            <option value="Political-Science">Political-Science</option>
-                                            <option value="Programming">Programming</option>
-                                            <option value="Psychology">Psychology</option>
-                                            <option value="Religion">Religion</option>
-                                            <option value="Sociology">Sociology</option>
-                                            <option value="Statistics">Statistics</option>
+                                        <option value="Archaeology">Archaeology</option>
+                                        <option value="Architecture">Architecture</option>
+                                        <option value="Arts">Arts</option>
+                                        <option value="Astronomy">Astronomy</option>
+                                        <option value="Biology">Biology</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Chemistry">Chemistry</option>
+                                        <option value="Childcare">Childcare</option>
+                                        <option value="Computers">Computers</option>
+                                        <option value="Counseling">Counseling</option>
+                                        <option value="Criminology">Criminology</option>
+                                        <option value="Economics">Economics</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Engineering">Engineering</option>
+                                        <option value="Environmental-Studies">Environmental-Studies</option>
+                                        <option value="Ethics">Ethics</option>
+                                        <option value="Ethnic-Studies">Ethnic-Studies</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Food-Nutrition">Food-Nutrition</option>
+                                        <option value="Geography">Geography</option>
+                                        <option value="Healthcare">Healthcare</option>
+                                        <option value="History">History</option>
+                                        <option value="Law">Law</option>
+                                        <option value="Linguistics">Linguistics</option>
+                                        <option value="Literature">Literature</option>
+                                        <option value="Management">Management</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Medicine">Medicine</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Nursing">Nursing</option>
+                                        <option value="Philosophy">Philosophy</option>
+                                        <option value="Physical-Education">Physical-Education</option>
+                                        <option value="Physics">Physics</option>
+                                        <option value="Political-Science">Political-Science</option>
+                                        <option value="Programming">Programming</option>
+                                        <option value="Psychology">Psychology</option>
+                                        <option value="Religion">Religion</option>
+                                        <option value="Sociology">Sociology</option>
+                                        <option value="Statistics">Statistics</option>
 
 
                                     </select>
@@ -141,7 +142,9 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="pwd">Deadline</label>
-                                    <input type="text" class="form-control" placeholder="Select Date" id="pwd">
+                                    <input type="text" name="deadline" class="form-control" placeholder="Select Deadline"
+                                        id="deadline">
+
                                 </div>
                                 <div class="form-group col -md-12">
                                     <label for="comment">Instructions/Additional Information</label>
@@ -150,13 +153,14 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="comment">Attach Assignment</label>
+                                    <label for="comment">Attach Files for this assignment</label>
 
                                     <div class="input-group control-group increment">
                                         <input type="file" name="filename[]" class="form-control">
+                                        <br>
                                         <div class="input-group-btn">
                                             <button class="btn btn-success" type="button"><i
-                                                    class="glyphicon glyphicon-plus"></i>Add</button>
+                                                    class="glyphicon glyphicon-plus"></i>Attach More Files</button>
                                         </div>
                                     </div>
                                     <div class="clone hide">
@@ -184,6 +188,7 @@
                     </div>
 
                     <script type="text/javascript">
+                        instance = new dtsel.DTS('input[name="deadline"]');
                         $(".clone").hide();
                         $(document).ready(function() {
                             $(".btn-success").click(function() {
