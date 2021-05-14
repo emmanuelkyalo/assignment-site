@@ -29,7 +29,6 @@ class CreateAssignmentsTable extends Migration
             $table->string('completionStatus');
             $table->string('deadline');
 
-
             $table->timestamps();
         });
     }

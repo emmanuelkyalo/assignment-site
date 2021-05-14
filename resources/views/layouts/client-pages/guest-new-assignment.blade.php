@@ -12,6 +12,21 @@
                             {{ csrf_field() }}
                             <div class="form-row">
                                 <div class="form-group col-md-6">
+                                    <label for="email">Name</label>
+                                    <input required type="text" class="form-control" placeholder="Eg. Tim Tom" id="student_name"
+                                        name="student_name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Email</label>
+                                    <input required type="text" class="form-control" placeholder="Eg. timtom@xmail.com" id="student_email"
+                                        name="student_email">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="email">Phone Number(International Format)</label>
+                                    <input required type="text" class="form-control" placeholder="Eg. +971 111 111" id="phone_number"
+                                        name="phone_number">
+                                </div>
+                                <div class="form-group col-md-6">
                                     <label for="email">Assignment Title</label>
                                     <input type="text" class="form-control" placeholder="Enter title" id="title"
                                         name="title">
@@ -20,6 +35,7 @@
                                     <label for="sel1">Education Level:</label>
                                     <select class="form-control" id="education_level" name="education_level">
                                         <option value="Undergraduate">Undergraduate</option>
+                                        <option value="Undergraduate">College</option>
                                         <option value="High School">High School</option>
                                         <option value="Masters">Masters</option>
 
@@ -30,7 +46,7 @@
                                 <div class="form-group col-md-6 ">
                                     <label for="sel1">Subject Area:</label>
                                     <select class="form-control" id="subject_area" name="subject_area">
-                                        <option value="Archaeology">General</option>
+                                        <option value="General">General</option>
                                         <option value="Archaeology">Archaeology</option>
                                         <option value="Architecture">Architecture</option>
                                         <option value="Arts">Arts</option>
@@ -117,7 +133,8 @@
                                         <option value="Default(APA)">Default(APA)</option>
                                         <option value="APA">APA</option>
                                         <option value="Chicago">Chicago</option>
-                                        <option value="Harvard">Harvard</option <option value="MLA">MLA</option>
+                                        <option value="Harvard">Harvard</option
+                                            <option value="MLA">MLA</option>
 
                                     </select>
                                 </div>

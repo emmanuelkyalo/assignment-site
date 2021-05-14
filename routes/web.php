@@ -20,5 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/new-assigment','AssignmentController@newAssignmentForm');
-Route::post('/save-new-assignment','AssignmentController@storeNewAssignment');
+
+Route::middleware(['auth'])->group(function () {
+    //After Login the routes are accept by the loginUsers...
+    Route::get('/auth-new-assignment','AssignmentController@newAssignmentForm');
+    Route::post('/save-new-assignment','AssignmentController@storeNewAssignment');
+    });
+
+    Route::get('/guest-new-assignment','AssignmentController@guestNewAssignment');
