@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12" style="font-size: 11px">
             <div class="card">
                 <div class="card-header">{{ __('All My Assignments') }}</div>
 
@@ -39,7 +39,7 @@
                                     <td>{{ $assignment->subject_area }}</td>
                                     <td>{{ $assignment->level }}</td>
                                     <td>{{ $assignment->pages }}</td>
-                                    <td>{{ $assignment->created_ats }}</td>
+                                    <td>{{ $assignment->created_at }}</td>
                                     <td>{{ $assignment->deadline }}</td>
                                     <td>
                                         @if( $assignment->paymentStatus ==0)
