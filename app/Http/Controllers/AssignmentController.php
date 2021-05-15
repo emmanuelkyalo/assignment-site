@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
 {
+    public function myDashboard()
+    {
+        if (Auth::user()->is_admin == 1) {
+            return redirect()->route('admin-dashboard');
+        }
+        if(Auth::user()->is_admin==0){
+            return redirect()->route('client-dashboard');
+        }
+    }
     public function newAssignmentForm()
     {
         return view('layouts.client-pages.auth-new-assignment');
@@ -116,6 +125,7 @@ class AssignmentController extends Controller
                     $newFile = File::create([
                         'file_name' => $name,
                         'assignment_id' => $assignment_id,
+
                     ]);
                 }
 

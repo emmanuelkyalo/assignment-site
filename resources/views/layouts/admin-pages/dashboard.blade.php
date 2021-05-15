@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12" style="font-size: 11px">
             <div class="card">
-                <div class="card-header">{{ __('All My Assignments') }}</div>
+                <div class="card-header">{{ __('Jobs') }}</div>
 
                 <div class="card-body">
                     <div class="table-responsive">

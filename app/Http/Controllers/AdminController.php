@@ -11,6 +11,7 @@ class AdminController extends Controller
 {
     public function viewAssignments(){
         $assignments = Assignment::orderBy('id', 'DESC')->get();
+        
         return view('layouts\admin-pages\dashboard' ,compact('assignments'));
     }
 }

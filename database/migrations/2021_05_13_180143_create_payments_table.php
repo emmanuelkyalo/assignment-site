@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->integer('assignment_id')->unsigned();
             $table->foreign('assignment_id')->references('id')->on('assignments');
-            $table->integer('transaction_id');
+            $table->string('transaction_id');
             $table->double('amount');
             $table->string('payment_mode');
             $table->string('payment_date');

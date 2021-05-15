@@ -18,6 +18,7 @@ class CreateFilesTable extends Migration
             $table->string('file_name');
             $table->integer('assignment_id')->unsigned();
             $table->foreign('assignment_id')->references('id')->on('assignments');
+            $table->integer('file_type')->default(0);
             $table->timestamps();
         });
     }
