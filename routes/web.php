@@ -26,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin-dashboard', 'AdminController@viewAssignments')->name('admin-dashboard');
     Route::post('/record-payment', 'PaymentController@recordPayment');
     Route::post('/submit-solution','SolutionController@submitSolution');
+    Route::post('/markasunpaid','AssignmentController@markAsUnpaid');
+    Route::post('/markasincomplete','AssignmentController@markAsIncomplete');
 });
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/guest-new-assignment', 'AssignmentController@guestNewAssignment');

@@ -20,6 +20,8 @@ class CreateCommentsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->longText('comment');
+            $table->integer('admin_read_status');
+            $table->integer('client_read_status');
             $table->timestamps();
         });
     }

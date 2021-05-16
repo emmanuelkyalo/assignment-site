@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12 " >
+            <div class="col-md-12 ">
                 <div class="card">
                     <div class="card-header">{{ __('Submit Assignment') }}</div>
 
@@ -118,8 +118,7 @@
                                         <option value="Default(APA)">Default(APA)</option>
                                         <option value="APA">APA</option>
                                         <option value="Chicago">Chicago</option>
-                                        <option value="Harvard">Harvard</option
-                                            <option value="MLA">MLA</option>
+                                        <option value="Harvard">Harvard</option <option value="MLA">MLA</option>
 
                                     </select>
                                 </div>
