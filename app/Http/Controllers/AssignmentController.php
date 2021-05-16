@@ -3,28 +3,35 @@ namespace App\Http\Controllers;
 
 use App\Assignment;
 use App\File;
+use App\Notification;
 use Auth;
 use Illuminate\Http\Request;
-use App\Notification;
+
 class AssignmentController extends Controller
 {
-    public function markAsUnpaid(Request $request){
+    public function markAsUnpaid(Request $request)
+    {
 
-        $assignment=Assignment::where('id',$request->ass_id)->first();
-        $assignment->paymentStatus=0;
+        $assignment = Assignment::where('id', $request->ass_id)->first();
+        $assignment->paymentStatus = 0;
         $assignment->save();
 
-        $notification =new Notification();
-        $notification->assignment_id=$request->ass_id;
-        $notification->description="An assignment was marked as unpaid ";
-        $notification->url="/assignments/".$request->ass_id;
-        $notification->target='0';
+        $notification = new Notification();
+        $notification->assignment_id = $request->ass_id;
+        $notification->description = "An assignment was marked as unpaid ";
+        $notification->url = "/assignments/" . $request->ass_id;
+        $notification->target = '0';
+        $notification->save();
+
         return redirect()->route('assignment-detail', ['id' => $request->ass_id]);
     }
-    public function markAsIncomplete(Request $request){
-        $assignment=Assignment::where('id',$request->ass_id)->first();
-        $assignment->completionStatus=0;
+    public function markAsIncomplete(Request $request)
+    {
+        $assignment = Assignment::where('id', $request->ass_id)->first();
+        $assignment->completionStatus = 0;
         $assignment->save();
+
+        
         return redirect()->route('assignment-detail', ['id' => $request->ass_id]);
     }
     public function myDashboard()
@@ -32,7 +39,7 @@ class AssignmentController extends Controller
         if (Auth::user()->is_admin == 1) {
             return redirect()->route('admin-dashboard');
         }
-        if(Auth::user()->is_admin==0){
+        if (Auth::user()->is_admin == 0) {
             return redirect()->route('client-dashboard');
         }
     }
