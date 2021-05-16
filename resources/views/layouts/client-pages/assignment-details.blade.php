@@ -4,8 +4,9 @@
         <div class="row justify-content">
             <div class="col-md-7">
                 <div class="card">
-                    <div class="card-header"><a href="/client-dashboard">{{ __('All My Assignments') }}</a>/This
-                        Assignment</div>
+                    <div class="card-header"><a href="/client-dashboard">{{ __('All Assignments') }}</a>
+                        >>> This assignment
+                    </div>
                     <div class="card-body">
                         <p>Title: <span style="color:#65AAD8">{{ $assignment->title }}</span></p>
                         <p>Pages: <span style="color:#65AAD8">{{ $assignment->pages }}</span></p>
@@ -16,37 +17,32 @@
                         </p>
                         <p>Subject Area: <span style="color:#65AAD8">{{ $assignment->subject_area }}</span></p>
                         <p>Payment Status: <span style="color:#65AAD8">
-                            <form action="{{ url('/markasunpaid') }}" method="POST">
-                                @if ($assignment->paymentStatus == 0)
-                                    <button type="button" class="btn btn-danger btn-sm">Unpaid</button>
-                                @else
-                                    <button type="button" class="btn btn-success btn-sm">Paid</button>
-                                    @if (Auth::user()->is_admin == 1)
-
-                                        {{ csrf_field() }}
-                                        <input name="ass_id" type="hidden" value="{{ $assignment->id }}">
-                                        <button type="submit" class="btn btn-danger btn-sm">Mark as Unpaid</button>
-                                    </form>
-
-                                    @endif
+                                <form action="{{ url('/markasunpaid') }}" method="POST">
+                                    @if ($assignment->paymentStatus == 0)
+                                        <button type="button" class="btn btn-danger btn-sm">Unpaid</button>
+                                    @else
+                                        <button type="button" class="btn btn-success btn-sm">Paid</button>
+                                        @if (Auth::user()->is_admin == 1)
+                                            {{ csrf_field() }}
+                                            <input name="ass_id" type="hidden" value="{{ $assignment->id }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Mark as Unpaid</button>
+                                </form>
                                 @endif
-                                    </form>
-
+                                @endif
+                                </form>
                             </span></p>
-                        <p>Completion Status: <span style="color:#65AAD8">  <form action="{{ url('/markasincomplete') }}" method="POST">
-                                @if ($assignment->completionStatus == 0)
-                                    <button type="button" class="btn btn-warning btn-sm">Pending</button>
-
-                                @else
-                                    <button type="button" class="btn btn-success btn-sm">Completed</button>
-                                    @if (Auth::user()->is_admin == 1)
-
-                                        {{ csrf_field() }}
-                                        <input name="ass_id" type="hidden" value="{{ $assignment->id }}">
-                                        <button type="submit" class="btn btn-danger btn-sm">Mark as Incomplete</button>
-                                    </form>
-
-                                    @endif
+                        <p>Completion Status: <span style="color:#65AAD8">
+                                <form action="{{ url('/markasincomplete') }}" method="POST">
+                                    @if ($assignment->completionStatus == 0)
+                                        <button type="button" class="btn btn-warning btn-sm">Pending</button>
+                                    @else
+                                        <button type="button" class="btn btn-success btn-sm">Completed</button>
+                                        @if (Auth::user()->is_admin == 1)
+                                            {{ csrf_field() }}
+                                            <input name="ass_id" type="hidden" value="{{ $assignment->id }}">
+                                            <button type="submit" class="btn btn-danger btn-sm">Mark as Incomplete</button>
+                                </form>
+                                @endif
                                 @endif
                             </span></p>
                         <p>Deadline: <span style="color:#65AAD8">{{ $assignment->deadline }}</span></p>
@@ -70,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5 mt-1">
                 <div class="card">
                     <div class="card-header">{{ __('Comment on this assignment') }}</div>
                     <div class="card-body">
@@ -130,7 +126,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Date of Payment</label>
-                                    <input type="text" class="form-control" id="payment_date" name="payment_date">
+                                    <input autocomplete="off" type="text" class="form-control" id="payment_date"
+                                        name="payment_date">
                                 </div>
                                 <div class="container">
                                     <div class="row">
@@ -144,6 +141,7 @@
                             <script>
                                 instance = new dtsel.DTS('input[name="payment_date"]');
                                 instance = new dtsel.DTS('input[name="completion_date"]');
+
                             </script>
                         </div>
                     </div>
@@ -157,7 +155,7 @@
                                 <div class="form-group">
                                     <label for="comment">Attach Files for this assignment</label>
                                     <div class="input-group control-group increment">
-                                        <input type="file" name="filename[]" class="form-control">
+                                        <input required type="file" name="filename[]" class="form-control">
                                         <br>
                                         <div class="input-group-btn">
                                             <button class="btn btn-success" type="button"><i
@@ -194,6 +192,7 @@
                                         $(this).parents(".control-group").remove();
                                     });
                                 });
+
                             </script>
                         </div>
                     </div>

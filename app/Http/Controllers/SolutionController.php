@@ -27,6 +27,7 @@ class SolutionController extends Controller
                 $assignment->completionStatus=1;
                 $assignment->save();
                 $notification= logNotification($request->ass_id, "A new file was uploaded to an assignment", "/assignments/" . $request->ass_id, 0);
+                $notification= logNotification($request->ass_id, "A new file was uploaded to an assignment", "/assignments/" . $request->ass_id, 1);
             }
         }
         return redirect()->route('assignment-detail', ['id' => $request->ass_id]);

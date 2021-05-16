@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Auth::routes();
 
 Route::post('/save-new-assignment', 'AssignmentController@storeNewAssignment');
@@ -23,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/post-new-comment', 'CommentsController@newComment');
     Route::get('/my-dashboard', 'AssignmentController@myDashboard');
     Route::get('/notifications','ClientController@notifications')->name('notifications');
+    Route::get('/','ClientController@notifications')->name('notifications');
     Route::get('/open-notification/{id}/{description}','ClientController@openNotification');
     //STRICTLY ADMIN ROUTES
     Route::get('/admin-dashboard', 'AdminController@viewAssignments')->name('admin-dashboard');

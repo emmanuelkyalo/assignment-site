@@ -54,7 +54,7 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link " href="/my-dashboard">My Dashboard</a>
+                            <a class="nav-link " href="/my-dashboard">Assignments</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
@@ -108,7 +108,14 @@
     </div>
     <style>
         .card-header {
-            background-color: #65AAD8;
+            background-color: #26A142;
+            color: white;
+        }
+        a{
+            color: black;
+        }
+        .card-body{
+            background-color: #F8F9FA;
         }
 
     </style>
