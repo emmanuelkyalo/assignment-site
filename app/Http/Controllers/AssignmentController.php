@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use App\Assignment;
 use App\File;
-use App\Notification;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -16,12 +15,7 @@ class AssignmentController extends Controller
         $assignment->paymentStatus = 0;
         $assignment->save();
 
-        $notification = new Notification();
-        $notification->assignment_id = $request->ass_id;
-        $notification->description = "An assignment was marked as unpaid ";
-        $notification->url = "/assignments/" . $request->ass_id;
-        $notification->target = '0';
-        $notification->save();
+       $notification= logNotification($request->ass_id, "An assignment was marked as unpaid", "/assignments/" . $request->ass_id, 0);
 
         return redirect()->route('assignment-detail', ['id' => $request->ass_id]);
     }
@@ -30,8 +24,8 @@ class AssignmentController extends Controller
         $assignment = Assignment::where('id', $request->ass_id)->first();
         $assignment->completionStatus = 0;
         $assignment->save();
+        $notification= logNotification($request->ass_id, "An assignment was marked as incomplete", "/assignments/" . $request->ass_id, 0);
 
-        
         return redirect()->route('assignment-detail', ['id' => $request->ass_id]);
     }
     public function myDashboard()
@@ -156,6 +150,7 @@ class AssignmentController extends Controller
                 }
 
             }
+            $notification= logNotification($assignment_id, "A new assignment was posted", "/assignments/" . $assignment_id, 1);
         }
         dd("done");
     }

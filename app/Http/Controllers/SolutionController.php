@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\File;
 use Illuminate\Http\Request;
 use App\Solution;
@@ -10,8 +8,6 @@ class SolutionController extends Controller
 {
     public function submitSolution(Request $request)
     {
-
-
             foreach ($request->file('filename') as $file) {
                 //dd($file);
                 $name = time() . ' ' . $file->getClientOriginalName();
@@ -21,8 +17,6 @@ class SolutionController extends Controller
                     'assignment_id' => $request->ass_id,
                     'file_type' => 1,
                 ]);
-
-
             $newFile = Solution::create([
                 'submission_status' => 1,
                 'assignment_id' =>$request->ass_id,
@@ -32,9 +26,8 @@ class SolutionController extends Controller
                 $assignment=Assignment::where('id',$request->ass_id)->first();
                 $assignment->completionStatus=1;
                 $assignment->save();
+                $notification= logNotification($request->ass_id, "A new file was uploaded to an assignment", "/assignments/" . $request->ass_id, 0);
             }
-
-
         }
         return redirect()->route('assignment-detail', ['id' => $request->ass_id]);
     }

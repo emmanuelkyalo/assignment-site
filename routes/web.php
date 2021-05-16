@@ -14,7 +14,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+
 Route::post('/save-new-assignment', 'AssignmentController@storeNewAssignment');
 Route::middleware(['auth'])->group(function () {
     Route::get('/auth-new-assignment', 'AssignmentController@newAssignmentForm')->name('auth-new-assignment');
@@ -22,6 +22,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/assignments/{id}', 'ClientController@assignmentDetails')->name('assignment-detail');
     Route::post('/post-new-comment', 'CommentsController@newComment');
     Route::get('/my-dashboard', 'AssignmentController@myDashboard');
+    Route::get('/notifications','ClientController@notifications')->name('notifications');
+    Route::get('/open-notification/{id}/{description}','ClientController@openNotification');
     //STRICTLY ADMIN ROUTES
     Route::get('/admin-dashboard', 'AdminController@viewAssignments')->name('admin-dashboard');
     Route::post('/record-payment', 'PaymentController@recordPayment');

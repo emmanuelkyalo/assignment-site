@@ -23,6 +23,7 @@ class PaymentController extends Controller
     $assignment=Assignment::where('id',$request->ass_id)->first();
     $assignment->paymentStatus=1;
     $assignment->save();
+    $notification= logNotification($request->ass_id, "An assignment was marked as paid", "/assignments/" . $request->ass_id, 0);
     return redirect()->route('assignment-detail', ['id' => $request->ass_id]);
     }
 }

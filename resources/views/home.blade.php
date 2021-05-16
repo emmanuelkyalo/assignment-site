@@ -3,18 +3,25 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('My Notifications') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    @forelse($notifications as $notification)
+                      @if($notification->read_status==0)
+                        <div class="alert alert-success"> <a href="/open-notification/{{ $notification->assignment_id }}/{{ $notification->description }}">(Unread) {{ $notification->description }}</a></div>
+
+                        @else
+                        <div class="alert alert-light"> <a href="/open-notification/{{ $notification->assignment_id }}/{{ $notification->description }}">{{ $notification->description }}</a></div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+
+                    @empty
+
+                    @endforelse
+            </div>
+
                 </div>
             </div>
         </div>
