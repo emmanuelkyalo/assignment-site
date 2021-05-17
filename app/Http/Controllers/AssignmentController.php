@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Assignment;
 use App\File;
 use Auth;
 use Illuminate\Http\Request;
+
 class AssignmentController extends Controller
 {
     public function markAsUnpaid(Request $request)
@@ -11,16 +13,16 @@ class AssignmentController extends Controller
         $assignment = Assignment::where('id', $request->ass_id)->first();
         $assignment->paymentStatus = 0;
         $assignment->save();
-       $notification= logNotification($request->ass_id, "An assignment was marked as unpaid", "/assignments/" . $request->ass_id, 0);
-        return redirect()->route('assignment-detail', ['id' => $request->ass_id])->with('success','The assignment has been successfully marked as unpaid!');
+        $notification = logNotification($request->ass_id, "An assignment was marked as unpaid", "/assignments/" . $request->ass_id, 0);
+        return redirect()->route('assignment-detail', ['id' => $request->ass_id])->with('success', 'The assignment has been successfully marked as unpaid!');
     }
     public function markAsIncomplete(Request $request)
     {
         $assignment = Assignment::where('id', $request->ass_id)->first();
         $assignment->completionStatus = 0;
         $assignment->save();
-        $notification= logNotification($request->ass_id, "An assignment was marked as incomplete", "/assignments/" . $request->ass_id, 0);
-        return redirect()->route('assignment-detail', ['id' => $request->ass_id])->with('success','The assignment has been successfully marked as incomplete!');
+        $notification = logNotification($request->ass_id, "An assignment was marked as incomplete", "/assignments/" . $request->ass_id, 0);
+        return redirect()->route('assignment-detail', ['id' => $request->ass_id])->with('success', 'The assignment has been successfully marked as incomplete!');
     }
     public function myDashboard()
     {
@@ -140,10 +142,10 @@ class AssignmentController extends Controller
                     ]);
                 }
             }
-            $notification= logNotification($assignment_id, "A new assignment was posted", "/assignments/" . $assignment_id, 1);
-            return redirect()->route('assignment-detail', ['id' => $assignment_id])->with('success','The new assignment has been successfully posted!') ;
-        }else{
-            return redirect()->back()->with('error','The was a problem posting the assignment.Please try again') ;
+            $notification = logNotification($assignment_id, "A new assignment was posted", "/assignments/" . $assignment_id, 1);
+            return redirect()->route('assignment-detail', ['id' => $assignment_id])->with('success', 'The new assignment has been successfully posted!');
+        } else {
+            return redirect()->back()->with('error', 'The was a problem posting the assignment.Please try again');
         }
     }
 }

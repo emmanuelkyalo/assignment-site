@@ -37,8 +37,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/notifications">Notifications <span
-                                    class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/notifications">Notifications<span id="notification_count">(0)</span></a>
+                            <script>
+                                jQuery('#notification_count').load('<?php echo url('/updatenotifications') ?>');
+                                var autorefresh=setInterval(
+                                    function(){
+                                        jQuery('#notification_count').load('<?php echo url('/updatenotifications') ?>')
+                                    },5000);
+                                       </script>
                         </li>
                         @guest
                             <li class="nav-item">
@@ -103,7 +109,7 @@
                 </div>
             </div>
         </nav>
-        
+
         <main class="py-4" style="font-size: 13px">
 
             @yield('content')

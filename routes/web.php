@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/notifications','ClientController@notifications')->name('notifications');
     Route::get('/','ClientController@notifications')->name('notifications');
     Route::get('/open-notification/{id}/{description}','ClientController@openNotification');
+    Route::get('/updatenotifications','ClientController@notificationCount');
     //STRICTLY ADMIN ROUTES
     Route::get('/admin-dashboard', 'AdminController@viewAssignments')->name('admin-dashboard');
     Route::post('/record-payment', 'PaymentController@recordPayment');
