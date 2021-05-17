@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="container">
-
         <div class="row justify-content">
             <div class="col-md-7">
                 @include('layouts\flash-messages\flash-messages')
@@ -20,7 +18,6 @@
                         </p>
                         <p>Subject Area: <span style="color:#65AAD8">{{ $assignment->subject_area }}</span></p>
                         <p>Payment Status: <span style="color:#65AAD8">
-
                             <form id="payment" action="{{ url('/markasunpaid') }}" method="POST">
                                     @if ($assignment->paymentStatus == 0)
                                         <button type="button" class="btn btn-danger btn-sm">Unpaid</button>
@@ -33,7 +30,6 @@
                                 </form>
                                 @endif
                                 @endif
-
                             </span></p>
                         <p>Completion Status: <span style="color:#65AAD8">
                                 <form id="completion" action="{{ url('/markasincomplete') }}" method="POST">
@@ -72,14 +68,12 @@
                             @empty
                                 <p style="color:red">No solution files found</p>
                             @endforelse
-
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="card">
-
                     <div class="card-header">{{ __('Comment on this assignment') }}</div>
                     <div class="card-body">
                     </form>
@@ -87,7 +81,6 @@
                             <div class="form-group">
                                 <label for="email">Post new comment</label>
 <textarea name="comment" rows="6" class="form-control" required></textarea>
-
                                 {{ csrf_field() }}
                             </div>
                             <div class="container">
@@ -99,7 +92,6 @@
                                 </div>
                             </div>
                         </form>
-
                         <div style="max-height:296px;overflow-y: scroll">
                             @foreach ($comments as $comment)
                                 <div class="card mt-1">
@@ -110,7 +102,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
                     </div>
                 </div>
@@ -157,7 +148,6 @@
                             <script>
                                 instance = new dtsel.DTS('input[name="payment_date"]');
                                 instance = new dtsel.DTS('input[name="completion_date"]');
-
                             </script>
                         </div>
                     </div>
@@ -208,14 +198,11 @@
                                         $(this).parents(".control-group").remove();
                                     });
                                 });
-
                             </script>
                         </div>
                     </div>
                 </div>
             </div>
         @endif
-
     </div>
-
 @endsection

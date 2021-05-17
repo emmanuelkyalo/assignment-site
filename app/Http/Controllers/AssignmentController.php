@@ -1,22 +1,17 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Assignment;
 use App\File;
 use Auth;
 use Illuminate\Http\Request;
-
 class AssignmentController extends Controller
 {
     public function markAsUnpaid(Request $request)
     {
-
         $assignment = Assignment::where('id', $request->ass_id)->first();
         $assignment->paymentStatus = 0;
         $assignment->save();
-
        $notification= logNotification($request->ass_id, "An assignment was marked as unpaid", "/assignments/" . $request->ass_id, 0);
-
         return redirect()->route('assignment-detail', ['id' => $request->ass_id])->with('success','The assignment has been successfully marked as unpaid!');
     }
     public function markAsIncomplete(Request $request)
@@ -25,7 +20,6 @@ class AssignmentController extends Controller
         $assignment->completionStatus = 0;
         $assignment->save();
         $notification= logNotification($request->ass_id, "An assignment was marked as incomplete", "/assignments/" . $request->ass_id, 0);
-
         return redirect()->route('assignment-detail', ['id' => $request->ass_id])->with('success','The assignment has been successfully marked as incomplete!');
     }
     public function myDashboard()
@@ -128,7 +122,6 @@ class AssignmentController extends Controller
             'no_of_references' => $no_of_references,
             'subject_area' => $subject_area,
         ]);
-
         // dd($newAssignment);
         if ($newAssignment) {
             $latestID = Assignment::where('userEmail', Auth::user()->email)->latest('id')->first();
@@ -138,23 +131,19 @@ class AssignmentController extends Controller
                 $assignment_id = "";
             }
             if ($request->hasfile('filename')) {
-
                 foreach ($request->file('filename') as $file) {
                     $name = time() . ' ' . $file->getClientOriginalName();
                     $file->move(public_path() . '/client-files/', $name);
                     $newFile = File::create([
                         'file_name' => $name,
                         'assignment_id' => $assignment_id,
-
                     ]);
                 }
-
             }
             $notification= logNotification($assignment_id, "A new assignment was posted", "/assignments/" . $assignment_id, 1);
             return redirect()->route('assignment-detail', ['id' => $assignment_id])->with('success','The new assignment has been successfully posted!') ;
         }else{
             return redirect()->back()->with('error','The was a problem posting the assignment.Please try again') ;
         }
-
     }
 }
