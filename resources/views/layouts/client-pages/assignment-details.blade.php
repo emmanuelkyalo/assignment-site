@@ -1,8 +1,11 @@
 @extends('layouts.app')
 @section('content')
+
     <div class="container">
+
         <div class="row justify-content">
             <div class="col-md-7">
+                @include('layouts\flash-messages\flash-messages')
                 <div class="card">
                     <div class="card-header"><a href="/client-dashboard">{{ __('All Assignments') }}</a>
                         >>> This assignment
@@ -17,7 +20,8 @@
                         </p>
                         <p>Subject Area: <span style="color:#65AAD8">{{ $assignment->subject_area }}</span></p>
                         <p>Payment Status: <span style="color:#65AAD8">
-                                <form action="{{ url('/markasunpaid') }}" method="POST">
+
+                            <form id="payment" action="{{ url('/markasunpaid') }}" method="POST">
                                     @if ($assignment->paymentStatus == 0)
                                         <button type="button" class="btn btn-danger btn-sm">Unpaid</button>
                                     @else
@@ -29,10 +33,10 @@
                                 </form>
                                 @endif
                                 @endif
-                                </form>
+
                             </span></p>
                         <p>Completion Status: <span style="color:#65AAD8">
-                                <form action="{{ url('/markasincomplete') }}" method="POST">
+                                <form id="completion" action="{{ url('/markasincomplete') }}" method="POST">
                                     @if ($assignment->completionStatus == 0)
                                         <button type="button" class="btn btn-warning btn-sm">Pending</button>
                                     @else
@@ -49,42 +53,53 @@
                         <p>Date Posted: <span style="color:#65AAD8">{{ $assignment->created_at }}</span></p>
                         <div>
                             <p>Assignment Files:</p>
+                            @php
+                                $index=1;
+                            @endphp
                             @forelse ($files as $file )
-                                <p><a href="/client-files/{{ $file->file_name }}">{{ $file->file_name }}</a> Uploaded
+                                <p>{{ $index++ }}. <a href="/client-files/{{ $file->file_name }}">{{ $file->file_name }}</a> Uploaded
                                     on {{ $file->created_at }}</p>
                             @empty
                                 <p style="color:red">No assignment files found</p>
                             @endforelse
                             <p>Solution Files:</p>
+                            @php
+                            $index=1;
+                        @endphp
                             @forelse ($solutions as $file )
-                                <p><a href="/solutions/{{ $file->file_name }}">{{ $file->file_name }}</a> Uploaded on
+                                <p>{{ $index++ }}. <a href="/solutions/{{ $file->file_name }}">{{ $file->file_name }}</a> Uploaded on
                                     {{ $file->created_at }}</p>
                             @empty
                                 <p style="color:red">No solution files found</p>
                             @endforelse
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 mt-1">
+            <div class="col-md-5">
                 <div class="card">
+
                     <div class="card-header">{{ __('Comment on this assignment') }}</div>
                     <div class="card-body">
-                        <form action="{{ url('/post-new-comment') }}" method="POST">
-                            {{ csrf_field() }}
+                    </form>
+                        <form id="comment" method="POST" action="{{ url('/post-new-comment') }}">
                             <div class="form-group">
-                                <label for="email">Write New Comment</label>
-                                <textarea class="form-control" rows="6" id="comment" name="comment"></textarea>
+                                <label for="email">Post new comment</label>
+<textarea name="comment" rows="6" class="form-control" required></textarea>
+
+                                {{ csrf_field() }}
                             </div>
                             <div class="container">
                                 <div class="row">
                                     <div class="col text-center">
                                         <input name="ass_id" type="hidden" value="{{ $assignment->id }}">
-                                        <button type="submit" class="btn btn-primary btn-sm">Send Message</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
+
                         <div style="max-height:296px;overflow-y: scroll">
                             @foreach ($comments as $comment)
                                 <div class="card mt-1">
@@ -95,6 +110,7 @@
                                     </div>
                                 </div>
                             @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -106,7 +122,7 @@
                     <div class="card">
                         <div class="card-header">Payment</div>
                         <div class="card-body">
-                            <form action="{{ url('/record-payment') }}" method="POST">
+                            <form id="payment" action="{{ url('/record-payment') }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="email">Transaction ID</label>
@@ -150,7 +166,7 @@
                     <div class="card ">
                         <div class="card-header">Submit Solution</div>
                         <div class="card-body">
-                            <form action="{{ url('/submit-solution') }}" method="POST" enctype="multipart/form-data">
+                            <form id="solution" action="{{ url('/submit-solution') }}" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label for="comment">Attach Files for this assignment</label>
@@ -199,5 +215,7 @@
                 </div>
             </div>
         @endif
+
     </div>
+
 @endsection

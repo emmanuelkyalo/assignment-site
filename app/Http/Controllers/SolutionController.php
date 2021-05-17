@@ -28,8 +28,11 @@ class SolutionController extends Controller
                 $assignment->save();
                 $notification= logNotification($request->ass_id, "A new file was uploaded to an assignment", "/assignments/" . $request->ass_id, 0);
                 $notification= logNotification($request->ass_id, "A new file was uploaded to an assignment", "/assignments/" . $request->ass_id, 1);
+                return redirect()->route('assignment-detail', ['id' =>  $request->ass_id])->with('success','The solution has been successfully uploaded!') ;
+            }else{
+                return redirect()->route('assignment-detail', ['id' =>  $request->ass_id])->with('error','The solution could not be uploaded') ;
             }
         }
-        return redirect()->route('assignment-detail', ['id' => $request->ass_id]);
+
     }
 }

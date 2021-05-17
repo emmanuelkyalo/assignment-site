@@ -11,10 +11,10 @@ class ClientController extends Controller
     public function notifications()
     {
         if (Auth::user()->is_admin == 1) {
-            $notifications = Notification::where('target', 1)->orderBy('created_at','DESC')->orderBy('read_status','ASC')->get();
+            $notifications = Notification::where('target', 1)->orderBy('read_status','ASC')->orderBy('created_at','DESC')->get();
         }
         if (Auth::user()->is_admin == 0) {
-            $notifications = Notification::where('target', 0)->orderBy('created_at','DESC')->orderBy('read_status','ASC')->get();
+            $notifications = Notification::where('target', 0)->orderBy('read_status','ASC')->orderBy('created_at','DESC')->get();
         }
         return view('home', compact('notifications'));
     }

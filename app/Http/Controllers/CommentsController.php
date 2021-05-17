@@ -18,9 +18,10 @@ class CommentsController extends Controller
             $notification= logNotification($request->ass_id, "An assignment has a new comment.", "/assignments/" . $request->ass_id, 0);
             $notification= logNotification($request->ass_id, "An assignment has a new comment.", "/assignments/" . $request->ass_id, 1);
 
-            return redirect()->route('assignment-detail', ['id' => $request->ass_id]);
+
+            return redirect()->route('assignment-detail', ['id' =>  $request->ass_id])->with('success','The new comment has been successfully posted!') ;
         }else{
-            return redirect()->back();
+            return redirect()->back()->with('error','The comment could not be posted.Try again') ;
         }
 
     }
