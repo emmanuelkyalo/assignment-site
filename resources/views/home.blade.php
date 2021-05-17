@@ -10,7 +10,7 @@
                 <div class="card-body">
                     @forelse($notifications as $notification)
                       @if($notification->read_status==0)
-                        <div class="alert alert-danger"> <a href="/open-notification/{{ $notification->assignment_id }}/{{ $notification->description }}">(Unread) {{ $notification->description }}</a></div>
+                        <div class="alert alert-info"> <a href="/open-notification/{{ $notification->assignment_id }}/{{ $notification->description }}"><span class="bg-danger" style="color:white">NEW</span> {{ $notification->description }}</a></div>
 
                         @else
                         <div class="alert alert-success"> <a href="/open-notification/{{ $notification->assignment_id }}/{{ $notification->description }}">{{ $notification->description }}</a></div>
