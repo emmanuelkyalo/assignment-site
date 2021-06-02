@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use SendEmail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,17 +21,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/assignments/{id}', 'ClientController@assignmentDetails')->name('assignment-detail');
     Route::post('/post-new-comment', 'CommentsController@newComment');
     Route::get('/my-dashboard', 'AssignmentController@myDashboard');
-    Route::get('/notifications','ClientController@notifications')->name('notifications');
-    Route::get('/','ClientController@notifications')->name('notifications');
-    Route::get('/open-notification/{id}/{description}','ClientController@openNotification');
-    Route::get('/updatenotifications','ClientController@notificationCount');
+    Route::get('/notifications', 'ClientController@notifications')->name('notifications');
+    Route::get('/', 'ClientController@notifications')->name('notifications');
+    Route::get('/open-notification/{id}/{description}', 'ClientController@openNotification');
+    Route::get('/updatenotifications', 'ClientController@notificationCount');
     //STRICTLY ADMIN ROUTES
     Route::get('/admin-dashboard', 'AdminController@viewAssignments')->name('admin-dashboard');
     Route::post('/record-payment', 'PaymentController@recordPayment');
-    Route::post('/submit-solution','SolutionController@submitSolution');
-    Route::post('/markasunpaid','AssignmentController@markAsUnpaid');
-    Route::post('/markasincomplete','AssignmentController@markAsIncomplete');
+    Route::post('/submit-solution', 'SolutionController@submitSolution');
+    Route::post('/markasunpaid', 'AssignmentController@markAsUnpaid');
+    Route::post('/markasincomplete', 'AssignmentController@markAsIncomplete');
 });
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/guest-new-assignment', 'AssignmentController@guestNewAssignment');
 });
+Route::get('send-mail', );
